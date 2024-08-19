@@ -126,7 +126,7 @@ function determineColorFromNumber(colorNum: number): string | undefined {
     return undefined;
 }
 
-export = {
+export default {
     list: colors,
     keys: getColorList,
     fromString: resolveColor,

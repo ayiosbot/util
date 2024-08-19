@@ -1,21 +1,20 @@
-import Colors from './Colors';
 import { ObjectId } from 'mongodb';
 import path from 'path';
 import fs from 'fs';
-export * from './CachedCollection';
-export * from './CalculatePercentile';
-export * from './Collection';
-export * from './FuzzyFinder';
-export * from './ms';
-export * from './Mutex';
-export * from './PrettyBytes';
-export * from './PrettyMilliseconds';
-export * from './Redlock';
 
+export * as Colors from './Colors';
+export * as CachedCollection from './CachedCollection';
+export * as CalculatePercentile from './CalculatePercentile';
+export * as Collection from './Collection';
+export * as FuzzyFinder from './FuzzyFinder';
+export * as ms from './ms';
+export * as Mutex from './Mutex';
+export * as PrettyBytes from './PrettyBytes';
+export * as PrettyMilliseconds from './PrettyMilliseconds';
+export * as Redlock from './Redlock';
 
 
 export default {
-    Colors,
     /** Returns dev/prod based on platform (always 'dev' for win32) */
     get environment() {
         // return 'dev';
