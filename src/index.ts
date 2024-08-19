@@ -55,7 +55,7 @@ export default {
      * @param  {number} integer
      * @returns string
      */
-    formatReadable(integer: number): string {
+    formatNumber(integer: number): string {
         return integer.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     },
     searchDir(directory: string, execFunction: Function, excludeFiles?: string[], includeFiles?: string[]) {
