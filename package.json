@@ -4,8 +4,9 @@
   "description": "",
   "main": "out/src/index.js",
   "keywords": [],
-  "author": "DevAX1T (devax1t#0)",
+  "author": "Ayios (ayios.xyz)",
   "license": "MULTI",
+  "repository": "https://github.com/ayiosbot/ayios-util",
   "devDependencies": {
     "@types/node": "^16.11.6",
     "gts": "^3.1.1",
