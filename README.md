@@ -5,4 +5,4 @@
 </div>
 
 ## License
-All code created by Ayios is under MIT license. Other code is under its own respective license which will be displayed within their respective files.
+All code within this repository created by Ayios is under MIT license. Other code within this repository is under its own respective license which will be displayed within their respective files.
