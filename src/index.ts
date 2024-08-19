@@ -2,16 +2,16 @@ import { ObjectId } from 'mongodb';
 import path from 'path';
 import fs from 'fs';
 
-export * as Colors from './Colors';
-export * as CachedCollection from './CachedCollection';
-export * as CalculatePercentile from './CalculatePercentile';
-export * as Collection from './Collection';
+export { default as CachedCollection } from './CachedCollection';
+export { default as CalculatePercentile } from './CalculatePercentile';
+export { default as Collection } from './Collection';
+export { default as Colors } from './Colors';
+export { default as ms } from './ms';
+export { default as Mutex } from './Mutex';
+export { default as PrettyBytes } from './PrettyBytes';
+export { default as PrettyMilliseconds } from './PrettyMilliseconds';
+export { default as Redlock } from './Redlock';
 export * as FuzzyFinder from './FuzzyFinder';
-export * as ms from './ms';
-export * as Mutex from './Mutex';
-export * as PrettyBytes from './PrettyBytes';
-export * as PrettyMilliseconds from './PrettyMilliseconds';
-export * as Redlock from './Redlock';
 
 
 export default {

@@ -1,7 +1,7 @@
 import Collection from './Collection';
 
 /** Cached collection that deletes itself after a specified time period */
-export class CachedCollection<K, V> extends Collection<K, V> {
+export default class CachedCollection<K, V> extends Collection<K, V> {
     private cache: Record<string, NodeJS.Timeout> = {};
     public defaultMs: number = 15000;
     constructor(defaultMs: number) {
