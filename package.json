@@ -5,7 +5,7 @@
   "main": "out/src/index.js",
   "keywords": [],
   "author": "Ayios (ayios.xyz)",
-  "license": "MULTI",
+  "license": "MIT",
   "repository": "https://github.com/ayiosbot/ayios-util",
   "devDependencies": {
     "@types/node": "^16.11.6",
