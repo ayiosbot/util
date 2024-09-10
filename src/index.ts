@@ -2,9 +2,7 @@ import { ObjectId } from 'mongodb';
 import path from 'path';
 import fs from 'fs';
 
-export { default as CachedCollection } from './CachedCollection';
 export { default as CalculatePercentile } from './CalculatePercentile';
-export { default as Collection } from './Collection';
 export { default as Colors } from './Colors';
 export { default as ms } from './ms';
 export { default as Mutex } from './Mutex';
@@ -13,7 +11,6 @@ export { default as PrettyMilliseconds } from './PrettyMilliseconds';
 export { default as Redlock } from './Redlock';
 export * as FuzzyFinder from './FuzzyFinder';
 export * as Snowflake from './Snowflake'
-
 
 export default {
     /** Returns dev/prod based on platform (always 'dev' for win32) */
