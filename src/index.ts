@@ -1,6 +1,7 @@
 import { ObjectId } from 'mongodb';
 import path from 'path';
 import fs from 'fs';
+import os from 'os';
 
 export { default as CalculatePercentile } from './CalculatePercentile';
 export { default as Colors } from './Colors';
@@ -12,6 +13,8 @@ export { default as Redlock } from './Redlock';
 export * as FuzzyFinder from './FuzzyFinder';
 export * as Snowflake from './Snowflake'
 
+const HOSTNAME = os.hostname();
+
 export default {
     /** Returns dev/prod based on platform (always 'dev' for win32) */
     get environment() {
@@ -21,6 +24,18 @@ export default {
     },
     get isProd() {
         return this.environment === 'prod';
+    },
+    get hostname() {
+        if (!this.isProd) return 'local';
+        return HOSTNAME;
+    },
+    /** Return an array of shards using the first and last shard ID */
+    managedShards(firstShardID: number, lastShardID: number): number[] {
+        const shards = [];
+        for (let i = firstShardID; i < lastShardID + 1; i++) {
+            shards.push(i);
+        }
+        return shards;
     },
     /** Cuts a string off at {max} displaying ... at the end */
     cutoff(str: string, max: number): string {
