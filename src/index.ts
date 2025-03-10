@@ -19,6 +19,10 @@ export default {
         return process.platform === 'win32' ? 'dev' : 'prod';
         // return 'prod'; // Override for production testing
     },
+    get isProd() {
+        return this.environment === 'prod';
+    },
+    /** Cuts a string off at {max} displaying ... at the end */
     cutoff(str: string, max: number): string {
         return str.length < max ? str : `${str.substring(0, max)}...`;
     },
