@@ -1,7 +1,16 @@
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) 2025 Ayios. All rights reserved.
+ *  All code within this repository created by Ayios is under MIT license. Other code within
+ *  this repository is under its own respective license which will be displayed within their
+ *  respective files or around the areas of their code.
+ *  See LICENSE in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 import { ObjectId } from 'mongodb';
-import path from 'path';
 import fs from 'fs';
 import os from 'os';
+import path from 'path';
+import StringUtils from './StringUtils';
+import ObjectUtils from './ObjectUtils';
 
 export { default as CalculatePercentile } from './CalculatePercentile';
 export { default as Colors } from './Colors';
@@ -15,7 +24,22 @@ export * as Snowflake from './Snowflake'
 
 const HOSTNAME = os.hostname();
 
+export interface SearchDirectoryOptions {
+    excludeStartsWith?: string[];
+    excludeEndsWith?: string[];
+    excludeFiles?: string[];
+    /** If provided, this will remove extensions. If the file is not in this list, it'll disregard */
+    includeFiles?: string[];
+    /** Default false */
+    requireBeforeExec?: boolean;
+    /** Function to run. Passes the path of file and, if requireBeforeExec, the required file */
+    exec?: Function;
+}
+
 export default {
+    /** String utility functions */
+    get string(): typeof StringUtils { return StringUtils },
+    get object(): typeof ObjectUtils { return ObjectUtils },
     /** Returns dev/prod based on platform (always 'dev' for win32) */
     get environment() {
         // return 'dev';
@@ -37,16 +61,6 @@ export default {
         }
         return shards;
     },
-    /** Cuts a string off at {max} displaying ... at the end */
-    cutoff(str: string, max: number): string {
-        return str.length < max ? str : `${str.substring(0, max)}...`;
-    },
-    /** Return key searched by value */
-    dictionaryByValue(list: { [key: string]: any }, value: any): string | void {
-        for (const [ key, dictValue ] of Object.entries(list)) {
-            if (dictValue === value) return key;
-        }
-    },
     /** Returns flags a flag has (number[]) */
     flagsAll<T = number>(flags: T, comparison: { [key: string]: T }): T[] {
         // flagsAll(0, {mod:1,admin:2})
@@ -65,16 +79,56 @@ export default {
         return records as T;
     },
     /**
-     * Turn a number into a readable string.
-     * 
-     * Example: `1000 => 1,000`
-     * @param  {number} integer
-     * @returns string
+     * Search a directory. For the legacy function, use `legacySearchDir()`
+     * @param directory The directory to search
+     * @param options Directory search options. Automatically assigns (can be overwritten) excludeStartsWith: [ `.d.ts`, `.map` ].
      */
-    formatNumber(integer: number): string {
-        return integer.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    search(directory: string, options?: SearchDirectoryOptions) {
+        options = Object.assign(<SearchDirectoryOptions>{
+            excludeEndsWith: [ '.d.ts', '.map' ],
+            excludeStartsWith: [],
+            excludeFiles: [],
+            includeFiles: [],
+            requireBeforeExec: false,
+            exec: () => {}
+        }, options);
+        const recursive = (dir: string) => {
+            fs.readdirSync(dir).forEach(file => {
+                const currentPath = path.join(dir, file);
+                const stat = fs.statSync(currentPath);
+                if (stat.isDirectory()) {
+                    recursive(currentPath);
+                } else if (stat.isFile()) {
+                    const rawfile = file.split('.')[0];
+                    for (const str of options.excludeEndsWith!) {
+                        if (file.endsWith(str)) return;
+                    }
+                    for (const str of options.excludeStartsWith!) {
+                        if (file.startsWith(str)) return;
+                    }
+                    for (const filename of options.excludeFiles!) {
+                        if (rawfile === filename) return;
+                    }
+                    if (options.includeFiles!.length > 0) {
+                        if (!options.includeFiles!.includes(rawfile)) return;
+                    }
+                    const requiredFile = options.requireBeforeExec ? require(currentPath) : null;
+                    options.exec!(currentPath, requiredFile)
+                }
+            });
+        }
+        recursive(directory);
     },
-    searchDir(directory: string, execFunction: Function, excludeFiles?: string[], includeFiles?: string[]) {
+    /**
+     * @deprecated This will be removed. Likely somewhere in 1.9+
+     * 
+     * Legacy directory search. To be removed eventually.
+     * @param directory Directory to search
+     * @param execFunction The function to execute
+     * @param excludeFiles Exclusion files
+     * @param includeFiles Inclusion files (will exclude anything else. Do not include extension)
+     */
+    legacySearchDir(directory: string, execFunction: Function, excludeFiles?: string[], includeFiles?: string[]) {
         const search = (dir: string) => {
             fs.readdirSync(dir).forEach(file => {
                 const joined = path.join(dir, file);
@@ -92,10 +146,6 @@ export default {
             })
         }
         search(directory)
-    },
-    // Capitalize the first letter
-    capitalize(str: string): string {
-        return str.charAt(0).toUpperCase() + str.slice(1);
     },
     /**
      * Easy shortcut for a wait function
