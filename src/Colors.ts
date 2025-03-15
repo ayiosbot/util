@@ -1,87 +1,80 @@
-// export default {
-//     theme: '#5865F2',
-//     themeDark: '#4A55CB',
-//     embed: '#2B2D31',
-//     red: '#ED4245',
-//     red_2: '#DA373C',
-//     green: '#57F287',
-//     yellow: '#FEE75C',
-//     fuchsia: '#EB459E',
-//     white: '#FFFFFF',
-//     black: '#000000',
-//     green_2: '#27A97E',
-//     steel_blue: '#36536D',
-//     light_blue: '#25B7D3'
-// }
-
-// todo: fast flags
-/**
-Can turn on-off logs (server joins, server leaves, etc)
-*/
-// todo: make a dashboard with Iris on roblox
-
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) 2025 Ayios. All rights reserved.
+ *  All code within this repository created by Ayios is under MIT license. Other code within
+ *  this repository is under its own respective license which will be displayed within their
+ *  respective files or around the areas of their code.
+ *  See LICENSE in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 function rgb(r: number, g: number, b: number): number {
     return (r << 16) + (g << 8) + b
 }
 
 const colors = {
-    theme: rgb(88, 101, 242),
-    themeDark: rgb(74, 85, 203),
-    fuchsia: rgb(235, 69, 158),
-    green: rgb(87, 242, 135),
-    aqua: rgb(26,188,156),
-    black: rgb(1, 1, 1),
-    darkLightBlue: rgb(42, 114, 199),
-    red: rgb(237, 66, 69),
-    blue: rgb(54, 82, 109),
-    blurple: rgb(88,101,242),
-    brightGold: rgb(241,196,15),
-    coral: rgb(240, 128, 128),
-    darkAqua: rgb(0, 139, 139),
-    darkBlue: rgb(32,102,148),
-    darkButNotBlack: rgb(44,47,51),
-    darkerGrey: rgb(127,140,141),
-    darkGold: rgb(194,124,14),
-    darkGreen: rgb(17, 128, 106),
-    greenDark: rgb(1, 136, 91),
-    forestGreen: rgb(31,139,76),
-    darkGrey: rgb(50, 50, 50),
-    darkNavy: rgb(44,62,80),
-    darkOrange: rgb(168,67,0),
-    darkPurple: rgb(113,54,138),
-    darkRed: rgb(153,45,34),
-    darkVividPink: rgb(173,20,87),
-    orange: rgb(194, 125, 14),
-    discordSuccess: rgb(67, 173, 127),
-    dodgerBlue: rgb(30, 144, 255),
-    embedGrey: rgb(43, 45, 49),
-    gold: rgb(249, 166, 2),
-    grey: rgb(128, 128, 128),
-    greyple: rgb(153,170,181),
-    lightBlack: rgb(34, 34, 34),
-    lightBlue: rgb(70, 130, 180),
-    lightBlue2: rgb(52,152,219),
-    lightGreen: rgb(26, 188, 156),
-    lightGrey: rgb(188,192,192),
-    limeGreen: rgb(46, 204, 113),
-    luminousVividPink: rgb(233,30,99),
-    maroon: rgb(128, 0, 0),
-    metallicGold: rgb(212, 175, 55),
-    navy: rgb(52,73,94),
-    notQuiteBlack: rgb(35,39,42),
-    lightOrange: rgb(230, 126, 34),
-    purple: rgb(155,89,182),
-    white: rgb(255,255,255),
-    yellow: rgb(254, 231, 92),
+    // Ayios colors
+    theme:            rgb(88, 101, 242),
+    themeDark:        rgb(74, 85, 203),
+    alpha:            rgb(237, 66, 69),
+    beta:             rgb(18, 189, 186),
+    development:      rgb(5, 150, 255),
+    premium:          rgb(255, 190, 61),
+
+    // General colors
+    fuchsia:          rgb(235, 69, 158),
+    green:            rgb(87, 242, 135),
+    aqua:             rgb(26,188,156),
+    black:            rgb(1, 1, 1),
+    darkLightBlue:    rgb(42, 114, 199),
+    red:              rgb(237, 66, 69),
+    blue:             rgb(54, 82, 109),
+    blurple:          rgb(88,101,242),
+    brightGold:       rgb(241,196,15),
+    coral:            rgb(240, 128, 128),
+    darkAqua:         rgb(0, 139, 139),
+    darkBlue:         rgb(32,102,148),
+    darkButNotBlack:  rgb(44,47,51),
+    darkerGrey:       rgb(127,140,141),
+    darkGold:         rgb(194,124,14),
+    darkGreen:        rgb(17, 128, 106),
+    greenDark:        rgb(1, 136, 91),
+    forestGreen:      rgb(31,139,76),
+    darkGrey:         rgb(50, 50, 50),
+    darkNavy:         rgb(44,62,80),
+    darkOrange:       rgb(168,67,0),
+    darkPurple:       rgb(113,54,138),
+    darkRed:          rgb(153,45,34),
+    darkVividPink:    rgb(173,20,87),
+    orange:           rgb(194, 125, 14),
+    discordSuccess:   rgb(67, 173, 127),
+    dodgerBlue:       rgb(30, 144, 255),
+    embedGrey:        rgb(43, 45, 49),
+    gold:             rgb(249, 166, 2),
+    grey:             rgb(128, 128, 128),
+    greyple:          rgb(153,170,181),
+    lightBlack:       rgb(34, 34, 34),
+    lightBlue:        rgb(70, 130, 180),
+    lightBlue2:       rgb(52,152,219),
+    lightGreen:       rgb(26, 188, 156),
+    lightGrey:        rgb(188,192,192),
+    limeGreen:        rgb(46, 204, 113),
+    luminousVividPink:rgb(233,30,99),
+    maroon:           rgb(128, 0, 0),
+    metallicGold:     rgb(212, 175, 55),
+    navy:             rgb(52,73,94),
+    notQuiteBlack:    rgb(35,39,42),
+    lightOrange:      rgb(230, 126, 34),
+    purple:           rgb(155,89,182),
+    white:            rgb(255,255,255),
+    yellow:           rgb(254, 231, 92),
 }
 
+//> THE CODE BELOW (particularly "resolveColor" and potentially its comment) is under MIT license by discord.js (ColorResolvable)
 /** 
  * Resolve a color. Default/error is color.black. Allows "random" (rand color) or "default" (black)
  * @important Pass the generic <string> to remove strict typing for the parameter `color`.
  * @param color The color to resolve
  * @returns A color (black or the input color) as a number
  */
-function resolveColor<StringType = keyof typeof colors>(color: StringType | number | number[]): number { // Swiped from discord.js (ColorResolvable)
+function resolveColor<StringType = keyof typeof colors>(color: StringType | number | number[]): number {
     try {
         let resolvedColor;
       
@@ -106,16 +99,6 @@ function resolveColor<StringType = keyof typeof colors>(color: StringType | numb
 
 function getColorList(): string[] {
     return Object.keys(colors);
-}
-
-/** 
- * Determine a color (number) based off of its name
- * 
- * @default black
-*/
-function determineColor(color: string) {
-    if (color.startsWith('#')) return color;
-    return colors[color as keyof typeof colors] || rgb(1,1,1);
 }
 
 /** Determine a color (string) based off of its value */
