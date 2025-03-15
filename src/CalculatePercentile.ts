@@ -1,3 +1,5 @@
+// Courtesy of ChatGPT. Licensed under MIT
+
 /** Returns NaN if not enough data is provided. */
 export default function calculatePercentile(data: number[], percentile: number): number {
     // Step 1: Sort the data
@@ -20,4 +22,3 @@ export default function calculatePercentile(data: number[], percentile: number):
 
     return percentileValue;
 }
-// chatgpt lol
