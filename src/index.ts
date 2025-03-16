@@ -22,7 +22,6 @@ export { default as Redlock } from './Redlock';
 export * as FuzzyFinder from './FuzzyFinder';
 export * as Snowflake from './Snowflake'
 
-const HOSTNAME = os.hostname();
 
 export interface SearchDirectoryOptions {
     excludeStartsWith?: string[];
@@ -35,6 +34,15 @@ export interface SearchDirectoryOptions {
     /** Function to run. Passes the path of file and, if requireBeforeExec, the required file */
     exec?: Function;
 }
+
+export interface PackageJSON {
+    name: string;
+    version: string;
+    description: string;
+    repository?: string;
+}
+
+const HOSTNAME = os.hostname();
 
 export default {
     /** String utility functions */
@@ -52,6 +60,10 @@ export default {
     get hostname() {
         if (!this.isProd) return 'local';
         return HOSTNAME;
+    },
+    /** Read a package json. Uses direct path to the json file. */
+    packageJSON(directory: string) {
+        return require(path.join(directory)) as PackageJSON;
     },
     /** Return an array of shards using the first and last shard ID */
     managedShards(firstShardID: number, lastShardID: number): number[] {
