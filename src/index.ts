@@ -97,7 +97,7 @@ export default {
      * @param options Directory search options. Automatically assigns (can be overwritten) excludeEndsWith: [ `.d.ts`, `.map` ].
      */
     async search(directory: string, options?: SearchDirectoryOptions): Promise<void> {
-        options = Object.assign(<SearchDirectoryOptions>{
+        options = Object.assign({}, <SearchDirectoryOptions>{
             excludeEndsWith: [ '.d.ts', '.map' ],
             excludeStartsWith: [],
             excludeFiles: [],
@@ -116,18 +116,28 @@ export default {
                     await recursive(currentPath);
                 } else {
                     const rawfile = file.split('.')[0];
+                    let doContinue = false;
                     for (const str of options.excludeEndsWith!) {
-                        if (file.endsWith(str)) return;
+                        if (file.endsWith(str)) { doContinue = true; break; };
                     }
+                    if (doContinue) continue;
+
                     for (const str of options.excludeStartsWith!) {
-                        if (file.startsWith(str)) return;
+                        if (file.startsWith(str)) continue;
                     }
+
                     for (const filename of options.excludeFiles!) {
-                        if (rawfile === filename) return;
+                        // Evaluate the exclusion "example" or "example.js"
+                        if (rawfile === filename || file === filename) continue;
                     }
+
                     if (options.includeFiles!.length > 0) {
-                        if (!options.includeFiles!.includes(rawfile)) return;
+                        if (
+                            !options.includeFiles!.includes(rawfile)
+                            || options.includeFiles!.includes(file)
+                        ) continue;
                     }
+
                     const requiredFile = options.requireBeforeExec ? require(currentPath) : null;
                     options.exec!(currentPath, requiredFile)
                 }
