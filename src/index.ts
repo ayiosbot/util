@@ -25,6 +25,7 @@ export * as Snowflake from './Snowflake'
 
 export interface SearchDirectoryOptions {
     excludeStartsWith?: string[];
+    /** Automatically assigns (can be overwritten) [ `.d.ts`, `.map` ] */
     excludeEndsWith?: string[];
     excludeFiles?: string[];
     /** If provided, this will remove extensions. If the file is not in this list, it'll disregard */
@@ -93,9 +94,9 @@ export default {
     /**
      * Search a directory. For the legacy function, use `legacySearchDir()`
      * @param directory The directory to search
-     * @param options Directory search options. Automatically assigns (can be overwritten) excludeStartsWith: [ `.d.ts`, `.map` ].
+     * @param options Directory search options. Automatically assigns (can be overwritten) excludeEndsWith: [ `.d.ts`, `.map` ].
      */
-    search(directory: string, options?: SearchDirectoryOptions) {
+    async search(directory: string, options?: SearchDirectoryOptions): Promise<void> {
         options = Object.assign(<SearchDirectoryOptions>{
             excludeEndsWith: [ '.d.ts', '.map' ],
             excludeStartsWith: [],
@@ -104,13 +105,16 @@ export default {
             requireBeforeExec: false,
             exec: () => {}
         }, options);
-        const recursive = (dir: string) => {
-            fs.readdirSync(dir).forEach(file => {
+        
+        const recursive = async (dir: string) => {
+            const files = await fs.promises.readdir(dir);
+            for (const file of files) {
                 const currentPath = path.join(dir, file);
-                const stat = fs.statSync(currentPath);
+                const stat = await fs.promises.stat(currentPath);
+
                 if (stat.isDirectory()) {
-                    recursive(currentPath);
-                } else if (stat.isFile()) {
+                    await recursive(currentPath);
+                } else {
                     const rawfile = file.split('.')[0];
                     for (const str of options.excludeEndsWith!) {
                         if (file.endsWith(str)) return;
@@ -127,9 +131,15 @@ export default {
                     const requiredFile = options.requireBeforeExec ? require(currentPath) : null;
                     options.exec!(currentPath, requiredFile)
                 }
-            });
+            }
         }
-        recursive(directory);
+
+        try {
+            await recursive(directory);
+            return Promise.resolve();
+        } catch (error) {
+            return Promise.reject(error);
+        }
     },
     /**
      * @deprecated This will be removed. Likely somewhere in 1.9+
