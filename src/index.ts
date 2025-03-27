@@ -12,6 +12,7 @@ import path from 'path';
 import StringUtils from './StringUtils';
 import ObjectUtils from './ObjectUtils';
 
+export { default as Bucket } from './Bucket';
 export { default as CalculatePercentile } from './CalculatePercentile';
 export { default as Colors } from './Colors';
 export { default as ms } from './ms';
