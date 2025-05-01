@@ -6,7 +6,17 @@
  *  See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 export default {
-    /** Cuts a string off at {max} displaying ... at the end */
+    CURRENCY_SYMBOL: '$',
+    CURRENCY_SEPARATOR: '',
+    /**
+     * Cuts a string off at {max} displaying ... at the end
+     * @param str The string to cutoff
+     * @param max The maximum length the string can be before cutting off
+     * @returns A cut string length: `max` + 3
+     * @example
+     * cutoff("HelloWorld", 5) // Hello...
+     * cutoff("Hey!") // Hey!
+     */
     cutoff(str: string, max: number): string {
         return str.length < max ? str : `${str.substring(0, max)}...`;
     },
@@ -27,4 +37,12 @@ export default {
     capitalize(str: string): string {
         return str.charAt(0).toUpperCase() + str.slice(1);
     },
+    /**
+     * Returns a currency-formatted string
+     * @param amount The amount to display
+     * @returns The currency
+     */
+    currency(amount: number) {
+        return `${this.CURRENCY_SYMBOL}${this.CURRENCY_SEPARATOR}${this.formatNumber(amount)}`;
+    }
 }
