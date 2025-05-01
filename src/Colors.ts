@@ -113,5 +113,12 @@ export default {
     list: colors,
     keys: getColorList,
     fromString: resolveColor,
-    fromNumber: determineColorFromNumber
+    fromNumber: determineColorFromNumber,
+
+    theme: colors.theme,
+    themeDark: colors.themeDark,
+    alpha: colors.alpha,
+    beta: colors.beta,
+    development: colors.development,
+    premium: colors.premium
 }
