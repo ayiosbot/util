@@ -223,44 +223,5 @@ export default {
           && obj.prototype.constructor.toString
           && obj.prototype.constructor.toString().substring(0, 5) === 'class'
         return isCtorClass || isPrototypeCtorClass
-    },
-    evaluateKey(key: string, value: any) {
-        if (key === '_id' && ObjectId.isValid(value)) {
-            return ObjectId.createFromHexString(value);
-        }
-        if (key.endsWith('_at') && typeof value === 'string') {
-            const parsed = Date.parse(value);
-            if (!isNaN(parsed)) return new Date(parsed);
-        }
-        return value;
-    },
-    objectRevive(object: any) {
-        const recurse = (obj: any) => {
-            for (const key of Object.keys(obj)) {
-                const value = obj[key];
-                if (typeof value === 'object') {
-                    recurse(obj[key]);
-                } else {
-                    obj[key] = this.evaluateKey(key, value);
-                    // if (key.endsWith('_at') && typeof value === 'string') {
-                    //     const parsed = Date.parse(value);
-                    //     if (!isNaN(parsed)) obj[key] = new Date(parsed);
-                    // }
-                    // if (key === '_id' && ObjectId.isValid(value)) {
-                    //     obj[key] = ObjectId.createFromHexString(value);
-                    // }
-                }
-            }
-        }
-        recurse(object);
-    },
-    JSONParseReviver(key: string, value: any) {
-        return this.evaluateKey(key, value);
-        // if (key === '_id' && ObjectId.isValid(value)) return ObjectId.createFromHexString(value);
-        // if (key.endsWith('_at') && typeof value === 'string') { // Assume that it's a date.
-        //     const parsed = Date.parse(value);
-        //     if (!isNaN(parsed)) return new Date(parsed);
-        // }
-        // return value;
-    },
+    }
 }
