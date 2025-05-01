@@ -5,12 +5,12 @@
  *  respective files or around the areas of their code.
  *  See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { ObjectId } from 'mongodb';
 import fs from 'fs';
+import NumberUtils from './NumberUtils';
+import ObjectUtils from './ObjectUtils';
 import os from 'os';
 import path from 'path';
 import StringUtils from './StringUtils';
-import ObjectUtils from './ObjectUtils';
 
 export { default as Bucket } from './Bucket';
 export { default as CalculatePercentile } from './CalculatePercentile';
@@ -50,6 +50,7 @@ export default {
     /** String utility functions */
     get string(): typeof StringUtils { return StringUtils },
     get object(): typeof ObjectUtils { return ObjectUtils },
+    get number(): typeof NumberUtils { return NumberUtils },
     /** Returns dev/prod based on platform (always 'dev' for win32) */
     get environment() {
         // return 'dev';
