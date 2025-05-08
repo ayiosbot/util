@@ -11,6 +11,7 @@ import ObjectUtils from './ObjectUtils';
 import os from 'os';
 import path from 'path';
 import StringUtils from './StringUtils';
+import TimestampUtils from './TimestampUtils';
 
 export { default as Bucket } from './Bucket';
 export { default as CalculatePercentile } from './CalculatePercentile';
@@ -47,10 +48,11 @@ export interface PackageJSON {
 const HOSTNAME = os.hostname();
 
 export default {
+    get number(): typeof NumberUtils { return NumberUtils },
+    get object(): typeof ObjectUtils { return ObjectUtils },
     /** String utility functions */
     get string(): typeof StringUtils { return StringUtils },
-    get object(): typeof ObjectUtils { return ObjectUtils },
-    get number(): typeof NumberUtils { return NumberUtils },
+    get timestamp(): typeof TimestampUtils { return TimestampUtils },
     /** Returns dev/prod based on platform (always 'dev' for win32) */
     get environment() {
         // return 'dev';
