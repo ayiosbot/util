@@ -44,5 +44,9 @@ export default {
      */
     currency(amount: number) {
         return `${this.CURRENCY_SYMBOL}${this.CURRENCY_SEPARATOR}${this.formatNumber(amount)}`;
+    },
+    /** Format code as a code block to be used in Discord */
+    formatCode(code: string, language: string = 'js'): string {
+        return `\`\`\`${language}\n${code}\`\`\``;
     }
 }
