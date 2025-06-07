@@ -164,39 +164,11 @@ export default {
         }
     },
     /**
-     * @deprecated This will be removed. Likely somewhere in 1.9+
-     * 
-     * Legacy directory search. To be removed eventually.
-     * @param directory Directory to search
-     * @param execFunction The function to execute
-     * @param excludeFiles Exclusion files
-     * @param includeFiles Inclusion files (will exclude anything else. Do not include extension)
-     */
-    legacySearchDir(directory: string, execFunction: Function, excludeFiles?: string[], includeFiles?: string[]) {
-        const search = (dir: string) => {
-            fs.readdirSync(dir).forEach(file => {
-                const joined = path.join(dir, file);
-                const stat = fs.statSync(joined);
-                if (stat.isDirectory()) {
-                    search(joined);
-                } else if (stat.isFile()) {
-                    if (file.endsWith('.map')) return;
-                    if (file.startsWith('$')) return;
-                    if (excludeFiles && excludeFiles.includes(file.split('.')[0])) return;
-                    if (includeFiles && !includeFiles.includes(file.split('.')[0])) return;
-                    const _file = require(joined);
-                    execFunction(joined, _file);
-                }
-            })
-        }
-        search(directory)
-    },
-    /**
      * Easy shortcut for a wait function
      * @param  {number} timeMs
      * @param  {boolean=false} doReject Rejects with 'promise timed out' if true and times out
      */
-    async wait(timeMs: number, doReject: boolean = false) {
+    async wait(timeMs: number, doReject: boolean = false): Promise<void> {
         return new Promise<void>((resolve, reject) => {
             setTimeout(() => doReject ? reject('promise timed out') : resolve(), timeMs);
         });
@@ -206,7 +178,7 @@ export default {
      * @param  {Promise<unknown>} promise
      * @param  {number} timeout
      */
-    async timeoutPromise(promise: Promise<unknown>, timeout: number) {
+    async timeoutPromise<T>(promise: Promise<T>, timeout: number) {
         return Promise.race([ promise, this.wait(timeout, true) ])
     },
     /**
@@ -216,7 +188,7 @@ export default {
      * @param  {Function} action
      * @returns Promise
      */
-    async promiseAction(promise: Promise<unknown>, action: Function): Promise<unknown> {
+    async promiseAction<T>(promise: Promise<T>, action: (result: T) => void): Promise<T> {
         return new Promise((resolve, reject) => {
             promise.then(result => {
                 resolve(result);
@@ -234,5 +206,24 @@ export default {
           && obj.prototype.constructor.toString
           && obj.prototype.constructor.toString().substring(0, 5) === 'class'
         return isCtorClass || isPrototypeCtorClass
+    },
+    /**
+     * Checks if an object is an instance of a class. Does not use normal `instanceof`.
+     * 
+     * Useful if modules are split in a weird way and instanceof returns different results based on odd dependencies.
+     * @param obj The object to check
+     * @param classname The class name to check against
+     * @returns Generic `T` or false.
+     * @example
+     * ```ts
+        const msg = this.instanceof<Promise<void>>(promise, 'Promise');
+        // The above will be typed. If it exists, it will maintain the type of Promise<void>.
+     * ```
+     */
+    instanceof<T>(obj: any, classname: string): T | false {
+        if (obj.constructor.name === classname) {
+            return obj as T;
+        }
+        return false;
     }
 }
