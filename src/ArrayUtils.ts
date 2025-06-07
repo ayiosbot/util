@@ -6,7 +6,7 @@
  *  See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 export default {
-    /** Remove a single array element */
+    /** Remove a single array element. Returns the element enclosed in an array */
     removeIndex<T>(array: T[], index: number): T[] {
         return array.splice(index, 1) as T[];
     },

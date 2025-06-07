@@ -6,10 +6,13 @@
  *  See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import fs from 'fs';
-import NumberUtils from './NumberUtils';
-import ObjectUtils from './ObjectUtils';
 import os from 'os';
 import path from 'path';
+
+
+import ArrayUtils from './ArrayUtils';
+import NumberUtils from './NumberUtils';
+import ObjectUtils from './ObjectUtils';
 import StringUtils from './StringUtils';
 import TimestampUtils from './TimestampUtils';
 
@@ -20,6 +23,7 @@ export { default as Mutex } from './Mutex';
 export { default as PrettyBytes } from './PrettyBytes';
 export { default as PrettyMilliseconds } from './PrettyMilliseconds';
 export { default as Redlock } from './Redlock';
+
 export * as FuzzyFinder from './FuzzyFinder';
 export * as Snowflake from './Snowflake'
 
@@ -47,7 +51,11 @@ export interface PackageJSON {
 const HOSTNAME = os.hostname();
 
 export default {
+    /** Array utility functions */
+    get array(): typeof ArrayUtils { return ArrayUtils },
+    /** Number utility functions */
     get number(): typeof NumberUtils { return NumberUtils },
+    /** Object utility functions */
     get object(): typeof ObjectUtils { return ObjectUtils },
     /** String utility functions */
     get string(): typeof StringUtils { return StringUtils },
