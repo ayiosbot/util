@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://logo.ayios.xyz/Transparent" alt="Ayios Logo" width="120"/>
+  <img src="https://logo.ayios.xyz/" alt="Ayios Logo" width="120"/>
 </p>
 
 <h1 align="center">@ayios/util</h1>
