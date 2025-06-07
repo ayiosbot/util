@@ -14,7 +14,6 @@ import StringUtils from './StringUtils';
 import TimestampUtils from './TimestampUtils';
 
 export { default as Bucket } from './Bucket';
-export { default as CalculatePercentile } from './CalculatePercentile';
 export { default as Colors } from './Colors';
 export { default as ms } from './ms';
 export { default as Mutex } from './Mutex';
@@ -52,6 +51,7 @@ export default {
     get object(): typeof ObjectUtils { return ObjectUtils },
     /** String utility functions */
     get string(): typeof StringUtils { return StringUtils },
+    /** Default timestamp format: `R` */
     get timestamp(): typeof TimestampUtils { return TimestampUtils },
     /** Returns dev/prod based on platform (always 'dev' for win32) */
     get environment() {
