@@ -1,6 +1,11 @@
-// @sapphire/snowflake
-// Licensed under MIT
-// Swiped from https://github.com/sapphiredev/utilities/tree/main/packages/snowflake
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) 2025 Ayios. All rights reserved.
+ *  All code within this repository created by Ayios is under MIT license. Other code within
+ *  this repository is under its own respective license which will be displayed within their
+ *  respective files or around the areas of their code.
+ *  See LICENSE in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+// This file is licensed under MIT and was drived from https://github.com/sapphiredev/utilities/tree/main/packages/snowflake
 
 const IncrementSymbol = Symbol('@ayios/snowflake.increment');
 const EpochSymbol = Symbol('@ayios/snowflake.epoch');
