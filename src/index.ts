@@ -20,6 +20,7 @@ export { default as Bucket } from './Bucket';
 export { default as Colors } from './Colors';
 export { default as ms } from './ms';
 export { default as Mutex } from './Mutex';
+export { default as Pages } from './Pages';
 export { default as PrettyBytes } from './PrettyBytes';
 export { default as PrettyMilliseconds } from './PrettyMilliseconds';
 export { default as Redlock } from './Redlock';
