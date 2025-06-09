@@ -56,5 +56,19 @@ export default {
     /** Format code as a code block to be used in Discord */
     formatCode(code: string, language: string = 'js'): string {
         return `\`\`\`${language}\n${code}\`\`\``;
+    },
+    /**
+     * Returns a pluralized string based on the length of the array or number.
+     * @param array The array or array length to check
+     * @returns An empty string if singular, 's' if plural
+     * @example
+     * plural(['hello', 'world']) // returns 's'
+     * plural(['hello']) // returns ''
+     * plural(1) // returns ''
+     * plural(2) // returns 's'
+     */
+    plural(array: any[] | number): string {
+        return (Array.isArray(array) ? array.length : array) === 1 ? '' : 's';
     }
+    
 }
