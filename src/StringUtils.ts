@@ -69,6 +69,23 @@ export default {
      */
     plural(array: any[] | number): string {
         return (Array.isArray(array) ? array.length : array) === 1 ? '' : 's';
+    },
+    /**
+     * Joins a list of strings into a human-readable format.
+     * @param list The list of strings to join
+     * @returns A string formatted as "item1, item2, and item3"
+     * @example
+     * joinList(['apple', 'banana', 'cherry']) // returns "apple, banana, and cherry"
+     * joinList(['apple']) // returns "apple"
+     * joinList([]) // returns ""
+     * joinList(['apple', 'banana']) // returns "apple and banana"
+     */
+    joinList(list: string[]): string {
+        if (list.length === 0) return '';
+        if (list.length === 1) return list[0];
+        if (list.length === 2) return `${list[0]} and ${list[1]}`;
+        
+        const lastItem = list.pop();
+        return `${list.join(', ')}, and ${lastItem}`;
     }
-    
 }
