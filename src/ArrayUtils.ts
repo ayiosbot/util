@@ -25,5 +25,20 @@ export default {
         }
 
         return undefined;
+    },
+    /**
+     * Checks if an array contains any of the specified elements.
+     * 
+     * This method returns true if at least one of the elements is found in the array.
+     * @param source The array to check.
+     * @param elements The elements to check for in the array.
+     * @example
+     * const myArray = [1, 2, 3, 4, 5];
+     * hasAny(myArray, 2); // true
+     * hasAny(myArray, 2, 6); // true
+     * hasAny(myArray, 6, 7); // false
+     */
+    hasAny(source: any[], ...elements: any[]): boolean {
+        return elements.some(element => source.includes(element));
     }
 }
