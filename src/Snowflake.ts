@@ -15,17 +15,17 @@ const WorkerIdSymbol = Symbol('@ayios/snowflake.workerId');
 /**
  * The maximum value the `workerId` field accepts in snowflakes.
  */
-export const MaximumWorkerId = 0b11111n;
+export const SnowflakeMaximumWorkerId = 0b11111n;
 
 /**
  * The maximum value the `processId` field accepts in snowflakes.
  */
-export const MaximumProcessId = 0b11111n;
+export const SnowflakeMaximumProcessId = 0b11111n;
 
 /**
  * The maximum value the `increment` field accepts in snowflakes.
  */
-export const MaximumIncrement = 0b111111111111n;
+export const SnowflakeMaximumIncrement = 0b111111111111n;
 
 /**
  * A class for generating and deconstructing Twitter snowflakes.
@@ -97,7 +97,7 @@ export class Snowflake {
 	 * @param value The new value, will be coerced to BigInt and masked with `0b11111n`
 	 */
 	public set processId(value: number | bigint) {
-		this[ProcessIdSymbol] = BigInt(value) & MaximumProcessId;
+		this[ProcessIdSymbol] = BigInt(value) & SnowflakeMaximumProcessId;
 	}
 
 	/**
@@ -112,7 +112,7 @@ export class Snowflake {
 	 * @param value The new value, will be coerced to BigInt and masked with `0b11111n`
 	 */
 	public set workerId(value: number | bigint) {
-		this[WorkerIdSymbol] = BigInt(value) & MaximumWorkerId;
+		this[WorkerIdSymbol] = BigInt(value) & SnowflakeMaximumWorkerId;
 	}
 
 	/**
@@ -141,15 +141,15 @@ export class Snowflake {
 
 		if (typeof increment !== 'bigint') {
 			increment = this[IncrementSymbol];
-			this[IncrementSymbol] = (increment + 1n) & MaximumIncrement;
+			this[IncrementSymbol] = (increment + 1n) & SnowflakeMaximumIncrement;
 		}
 
 		// timestamp, workerId, processId, increment
 		return (
 			((timestamp - this[EpochSymbol]) << 22n) |
-			((workerId & MaximumWorkerId) << 17n) |
-			((processId & MaximumProcessId) << 12n) |
-			(increment & MaximumIncrement)
+			((workerId & SnowflakeMaximumWorkerId) << 17n) |
+			((processId & SnowflakeMaximumProcessId) << 12n) |
+			(increment & SnowflakeMaximumIncrement)
 		);
 	}
 
@@ -169,9 +169,9 @@ export class Snowflake {
 		return {
 			id: bigIntId,
 			timestamp: (bigIntId >> 22n) + epoch,
-			workerId: (bigIntId >> 17n) & MaximumWorkerId,
-			processId: (bigIntId >> 12n) & MaximumProcessId,
-			increment: bigIntId & MaximumIncrement,
+			workerId: (bigIntId >> 17n) & SnowflakeMaximumWorkerId,
+			processId: (bigIntId >> 12n) & SnowflakeMaximumProcessId,
+			increment: bigIntId & SnowflakeMaximumIncrement,
 			epoch
 		};
 	}
@@ -290,3 +290,4 @@ export interface DeconstructedSnowflake {
 }
 
 export const DiscordSnowflake = new Snowflake(1420070400000n);
+export const AyiosSnowflake = new Snowflake(1767297600000n) // 2026-01-01T00:00:00.000Z
