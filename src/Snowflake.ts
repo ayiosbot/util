@@ -7,6 +7,8 @@
  *--------------------------------------------------------------------------------------------*/
 // This file is licensed under MIT and was drived from https://github.com/sapphiredev/utilities/tree/main/packages/snowflake
 
+import { disconnect } from 'process';
+
 const IncrementSymbol = Symbol('@ayios/snowflake.increment');
 const EpochSymbol = Symbol('@ayios/snowflake.epoch');
 const ProcessIdSymbol = Symbol('@ayios/snowflake.processId');
@@ -290,4 +292,3 @@ export interface DeconstructedSnowflake {
 }
 
 export const DiscordSnowflake = new Snowflake(1420070400000n);
-export const AyiosSnowflake = new Snowflake(1767297600000n) // 2026-01-01T00:00:00.000Z
