@@ -20,8 +20,10 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
+ * ---------------------------------------------------------------------------------------------
+ * This file has been derived from:
+ * https://github.com/discord/pronoun-bot/blob/main/src/discord/bitfield.ts
  *----------------------------------------------------------------------------------------------*/
-// Obtained from https://github.com/discord/pronoun-bot/blob/main/src/discord/bitfield.ts
 export default class Bitfield<FlagType> {
 	constructor(public raw: number) {}
 
