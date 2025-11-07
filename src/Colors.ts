@@ -68,29 +68,49 @@ const colors = {
 }
 
 //> THE CODE BELOW (particularly "resolveColor" and potentially its comment) is under MIT license by discord.js (ColorResolvable)
-/** 
+/**
  * Resolve a color. Default/error is color.black. Allows "random" (rand color) or "default" (black)
  * @important Pass the generic <string> to remove strict typing for the parameter `color`.
  * @param color The color to resolve
  * @returns A color (black or the input color) as a number
  */
-function resolveColor<StringType = keyof typeof colors>(color: StringType | number | number[]): number {
+function resolveColor<
+    StringType = keyof typeof colors
+>(
+    color: StringType | number | number[]
+): number {
     try {
         let resolvedColor;
-      
+
         if (typeof color === 'string') {
-          if (color.toLowerCase() === 'random') return Math.floor(Math.random() * (0xffffff + 1));
-          if (color.toLowerCase() === 'default') return 0;
-          if (/^#?[\da-f]{6}$/i.test(color)) return parseInt(color.replace('#', ''), 16);
-          resolvedColor = colors[color as keyof typeof colors];
+            if (color.toLowerCase() === 'random') {
+                return Math.floor(Math.random() * (0xffffff + 1));
+            }
+            if (color.toLowerCase() === 'default') {
+                return 0;
+            }
+            if (/^#?[\da-f]{6}$/i.test(color)) {
+                return parseInt(
+                    color.replace('#', ''),
+                    16
+                );
+            }
+            resolvedColor = colors[color as keyof typeof colors];
         } else if (Array.isArray(color)) {
-          resolvedColor = (color[0] << 16) + (color[1] << 8) + color[2];
+            resolvedColor =
+                (color[0] << 16)
+                + (color[1] << 8)
+                + color[2];
         } else {
-          resolvedColor = color;
+            resolvedColor = color;
         }
-      
-        if (!Number.isInteger(resolvedColor)) return colors.black;
-        if (resolvedColor as number < 0 || resolvedColor as number > 0xffffff) return colors.black;
+
+        if (!Number.isInteger(resolvedColor)) {
+            return colors.black;
+        }
+        if ((resolvedColor as number < 0) || (resolvedColor as number > 0xffffff)) {
+            return colors.black;
+        }
         return resolvedColor as number;
     } catch {
         return colors.black;
@@ -104,8 +124,11 @@ function getColorList(): string[] {
 /** Determine a color (string) based off of its value */
 function determineColorFromNumber(colorNum: number): string | undefined {
     for (const color of Object.keys(colors)) {
-        if (colors[color as keyof typeof colors] === colorNum) return color;
+        if (colors[color as keyof typeof colors] === colorNum) {
+            return color;
+        }
     }
+
     return undefined;
 }
 
