@@ -1,15 +1,28 @@
 /*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2025 Ayios. All rights reserved.
- *  All code within this repository created by Ayios is under MIT license. Other code within
- *  this repository is under its own respective license which will be displayed within their
- *  respective files or around the areas of their code.
- *  See LICENSE in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
-/**
- * lovingly borrowed from eris and Oceanic (and modified a bit by Ayios)
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2016-2021 abalabahaha
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in
+ * the Software without restriction, including without limitation the rights to
+ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+ * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+ * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * --------------------------------------------------------------------------------------------
+ * This file was obtained from:
  * https://github.com/abalabahaha/eris/blob/dev/lib/util/Bucket.js (eb403730855714eafa36c541dbe2cb84c9979158)
- */
+ *--------------------------------------------------------------------------------------------*/
 
 /** A bucket. */
 export default class Bucket {
@@ -38,11 +51,11 @@ export default class Bucket {
     public updateRateLimit(newTokenLimit: number, newInterval: number): void {
         this.tokenLimit = newTokenLimit;   // Set the new token limit
         this.interval = newInterval;       // Set the new interval (time window)
-    
+
         // Reset tokens correctly to ensure next request is deducted properly
         this.lastReset = Date.now();       // Reset the last reset time
         this.tokens = Math.max(0, this.tokens - 1); // Consume 1 token for the request that triggered this update
-    
+
         this.check(); // Process the queue with new rate limits
     }
 
