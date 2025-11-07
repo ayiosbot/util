@@ -23,7 +23,6 @@ export { default as Mutex } from './Mutex';
 export { default as Pages } from './Pages';
 export { default as PrettyBytes } from './PrettyBytes';
 export { default as PrettyMilliseconds } from './PrettyMilliseconds';
-export { default as Redlock } from './Redlock';
 
 export { DeconstructedSnowflake, DiscordSnowflake, SnowflakeGenerateOptions } from './Snowflake';
 export * as FuzzyFinder from './FuzzyFinder';

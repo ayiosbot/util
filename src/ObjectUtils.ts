@@ -7,7 +7,7 @@
  *--------------------------------------------------------------------------------------------*/
 import { ObjectId } from 'mongodb';
 
-interface ReviveJSONOptions {
+export interface ReviveJSONOptions {
     /** If true, `_id` fields will be converted to `ObjectId`. */
     oid?: boolean;
     /** If true, fields ending in `At` or `_at` will be parsed as timestamps and converted to `Date`. */
