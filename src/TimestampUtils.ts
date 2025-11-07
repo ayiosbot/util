@@ -16,5 +16,5 @@ export default {
     },
     date(date: Date, format: TimestampFormat = 'R') {
         return this.ms(date.getTime(), format);
-    }    
+    }
 }
