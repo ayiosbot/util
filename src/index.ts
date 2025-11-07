@@ -16,6 +16,7 @@ import ObjectUtils from './ObjectUtils';
 import StringUtils from './StringUtils';
 import TimestampUtils from './TimestampUtils';
 
+export { default as Bitfield } from './Bitfield'
 export { default as Bucket } from './Bucket';
 export { default as Colors } from './Colors';
 export { default as ms } from './ms';
