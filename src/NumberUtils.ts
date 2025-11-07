@@ -12,7 +12,8 @@ export default {
             v = +v;
         }
         if (typeof v === 'number') {
-            return Number.isFinite(v) && Number.isSafeInteger(v) && v - v === 0;
+            return Number.isFinite(v)
+                && Number.isSafeInteger(v) && v - v === 0;
         }
         return false;
     }

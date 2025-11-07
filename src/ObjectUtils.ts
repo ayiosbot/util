@@ -24,7 +24,7 @@ export default {
      * @param dictionary The dictionary to search
      * @param value The value to return
      * @returns The key the value is indexed by
-     * 
+     *
      * @example
      * ```ts
      * const dict = { first: 1, second: 2, third: 3 }
@@ -39,16 +39,16 @@ export default {
     /**
      * Recursively revives an object by converting specific properties based on the provided options.
      * This method will transform certain properties like `_id` to `ObjectId` and timestamp-like fields to `Date` objects.
-     * 
+     *
      * @param object The object to transform
      * @param options Options to determine which fields will be transformed
      * @example
-     * const object = { 
-     *     _id: '507f191e810c19729de860ea', 
-     *     createdAt: '2021-01-01T00:00:00Z' 
+     * const object = {
+     *     _id: '507f191e810c19729de860ea',
+     *     createdAt: '2021-01-01T00:00:00Z'
      * };
      * const options = { oid: true, timestamp: true, createdAt: true };
-     * 
+     *
      * reviveObjectJSON(object, options); // The `_id` is converted to an ObjectId and `createdAt` is converted to a Date.
      */
     reviveObjectJSON(object: any, options: ReviveJSONOptions) {
