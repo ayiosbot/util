@@ -12,11 +12,11 @@ export default {
     },
     /**
      * Removes an element from an array by its value.
-     * 
+     *
      * This returns the removed element, or undefined if the element was not found.
      * @param array The array from which to remove the element.
      * @param element The element to remove from the array.
-     * @returns 
+     * @returns
      */
     removeElement<T>(array: T[], element: any): T | undefined {
         const index = array.indexOf(element);
@@ -28,7 +28,7 @@ export default {
     },
     /**
      * Checks if an array contains any of the specified elements.
-     * 
+     *
      * This method returns true if at least one of the elements is found in the array.
      * @param source The array to check.
      * @param elements The elements to check for in the array.
@@ -39,6 +39,8 @@ export default {
      * hasAny(myArray, 6, 7); // false
      */
     hasAny(source: any[], ...elements: any[]): boolean {
-        return elements.some(element => source.includes(element));
+        return elements.some(
+            element => source.includes(element)
+        );
     }
 }
