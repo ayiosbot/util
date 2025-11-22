@@ -84,7 +84,6 @@ export default class Bucket {
     /**
      * Internal method to process the queue and manage token consumption.
      * Handles timing, latency, and priority-based execution of queued items.
-     * @private
      */
     private check(): void {
         if (this.timeout || this._queue.length === 0) {

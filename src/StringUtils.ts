@@ -44,7 +44,9 @@ export default {
         return `${size} ${sizes[i]}`;
     },
     /**
-     * Capitalize the first letter of a string
+     * Capitalize the first letter of a string.
+     * If the string is empty or the first character is not alphabetic, it returns the string unchanged
+     * except that the first character will be uppercased if it has an uppercase form.
      * @param str The string to capitalize
      * @returns The capitalized string
      */
