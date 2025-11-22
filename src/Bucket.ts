@@ -24,7 +24,11 @@
  * https://github.com/abalabahaha/eris/blob/dev/lib/util/Bucket.js (eb403730855714eafa36c541dbe2cb84c9979158)
  *--------------------------------------------------------------------------------------------*/
 
-/** A bucket. */
+/**
+ * A token bucket implementation for rate limiting.
+ * Based on the token bucket algorithm, this class manages request rate limits
+ * by controlling the number of tokens available over time.
+ */
 export default class Bucket {
     private _queue: Array<{ priority: boolean; func(): void;}> = [];
     public interval: number;
@@ -44,6 +48,10 @@ export default class Bucket {
         this.timeout = null;
     }
 
+    /**
+     * Checks if tokens are available for consumption.
+     * @returns True if tokens are still available (not at the limit), false otherwise.
+     */
     get areTokensAvailable() {
         return this.tokens < this.tokenLimit;
     }
@@ -73,6 +81,10 @@ export default class Bucket {
         this.check();
     }
 
+    /**
+     * Internal method to process the queue and manage token consumption.
+     * Handles timing, latency, and priority-based execution of queued items.
+     */
     private check(): void {
         if (this.timeout || this._queue.length === 0) {
             return;

@@ -5,6 +5,13 @@
  *  respective files or around the areas of their code.
  *  See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
+/**
+ * Converts RGB color values to a single numeric value.
+ * @param r Red component (0-255).
+ * @param g Green component (0-255).
+ * @param b Blue component (0-255).
+ * @returns A numeric representation of the RGB color.
+ */
 function rgb(r: number, g: number, b: number): number {
     return (r << 16) + (g << 8) + b
 }
@@ -117,6 +124,10 @@ function resolveColor<
     }
   }
 
+/**
+ * Gets a list of all available color names.
+ * @returns An array of color name strings.
+ */
 function getColorList(): string[] {
     return Object.keys(colors);
 }

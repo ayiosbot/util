@@ -1,4 +1,9 @@
 export type PageFunction<T> = (page: number, items: T[]) => Promise<void>;
+
+/**
+ * A pagination utility class for managing and iterating through paginated content.
+ * Useful for breaking up large lists into smaller chunks and processing them page by page.
+ */
 export default class Pages<T> {
     /**
      * @warning This is a promise
@@ -20,6 +25,12 @@ export default class Pages<T> {
     public currentPage: number;
     /** The total number of pages. This begins with `1` */
     public totalPages: number;
+    
+    /**
+     * Creates a new Pages instance.
+     * @param list The complete list of items to paginate.
+     * @param itemsPerPage The number of items to display per page (default: 10).
+     */
     constructor(list: T[], itemsPerPage: number = 10) {
         this.contents = list;
         this.itemsPerPage = itemsPerPage;

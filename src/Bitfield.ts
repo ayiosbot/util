@@ -24,19 +24,42 @@
  * This file has been derived from:
  * https://github.com/discord/pronoun-bot/blob/main/src/discord/bitfield.ts
  *----------------------------------------------------------------------------------------------*/
+/**
+ * A bitfield class for managing binary flags.
+ * Allows checking, applying, and validating flags using bitwise operations.
+ */
 export default class Bitfield<FlagType> {
+	/**
+	 * Creates a new Bitfield instance.
+	 * @param raw The raw numeric value representing the bitfield.
+	 */
 	constructor(public raw: number) {}
 
+	/**
+	 * Checks if a specific bit is set in the bitfield.
+	 * @param bit The bit to check.
+	 * @returns True if the bit is set, false otherwise.
+	 */
 	has(bit: FlagType): boolean {
 		return (
 			(this.raw & (bit as unknown as number)) === (bit as unknown as number)
 		);
 	}
 
+	/**
+	 * Checks if all specified bits are set in the bitfield.
+	 * @param bits An array of bits to check.
+	 * @returns True if all bits are set, false otherwise.
+	 */
 	hasAll(bits: FlagType[]): boolean {
 		return bits.every((bit) => this.has(bit));
 	}
 
+	/**
+	 * Applies (sets) multiple bits to the bitfield.
+	 * @param bits An array of bits to apply.
+	 * @returns The current Bitfield instance for chaining.
+	 */
 	apply(bits: FlagType[]): this {
 		this.raw |= bits.reduce((a, b) => {
 			return a | (b as unknown as number);

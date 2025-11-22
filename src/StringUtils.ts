@@ -29,6 +29,12 @@ export default {
     formatNumber(integer: number): string {
         return integer.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     },
+    /**
+     * Formats bytes into a human-readable string representation.
+     * @param bytes The number of bytes to format.
+     * @param decimalPlaces The number of decimal places to display (default: 2).
+     * @returns A formatted string representation of the bytes (e.g., "1.50 MB").
+     */
     formatBytes(bytes: number, decimalPlaces: number = 2): string {
         if (bytes === 0) return '0 Bytes';
 
@@ -38,9 +44,11 @@ export default {
         return `${size} ${sizes[i]}`;
     },
     /**
-     * Capitalize the first letter of a string
+     * Capitalize the first letter of a string.
+     * If the string is empty or the first character is not alphabetic, it returns the string unchanged
+     * except that the first character will be uppercased if it has an uppercase form.
      * @param str The string to capitalize
-     * @returns 
+     * @returns The capitalized string
      */
     capitalize(str: string): string {
         return str.charAt(0).toUpperCase() + str.slice(1);

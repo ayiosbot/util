@@ -5,9 +5,18 @@
  *  respective files or around the areas of their code.
  *  See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
+/**
+ * A mutual exclusion (mutex) lock implementation.
+ * Provides a way to ensure exclusive access to a resource by only allowing
+ * one holder at a time. Other callers wait in a queue until the lock is released.
+ */
 export default class Mutex {
     private readonly queue: (() => void)[] = [];
     private _isLocked: boolean = false;
+    /**
+     * Checks if the mutex is currently locked.
+     * @returns True if the mutex is locked, false otherwise.
+     */
     public isLocked(): boolean {
         return this._isLocked;
     }
@@ -20,6 +29,11 @@ export default class Mutex {
             } else this.queue.push(resolve);
         });
     }
+    /**
+     * Releases the mutex lock.
+     * If there are waiting callers in the queue, the next one is granted the lock.
+     * Otherwise, the mutex becomes unlocked.
+     */
     public async release() {
         if (this.queue.length > 0) {
             const _next = this.queue.shift();
